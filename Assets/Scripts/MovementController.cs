@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class MovementController : MonoBehaviour
 {
-    private PlayerInput _playerInput;
-    private Rigidbody2D _rigidbody2D;
+    private PlayerInput playerInput;
+    private Rigidbody2D rigidbody2D;
 
     [SerializeField]
     public int speed;
@@ -22,6 +22,9 @@ public class MovementController : MonoBehaviour
     public Transform wallCheckPoint;
     private Vector2 relativeTransform;
 
+    public bool isOnPlatform;
+    public Rigidbody2D platformRigitbody2d;
+
     public void Start()
     {
         UpdateRelativeTransform();
@@ -29,16 +32,25 @@ public class MovementController : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _playerInput = GetComponent<PlayerInput>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void FixedUpdate()
     {
         UpdateSpeedMultiplier();
-        float  targetSpeed = speed * speedMultiper * relativeTransform.x;
-        _rigidbody2D.velocity = new Vector2(targetSpeed, _rigidbody2D.velocity.y);
-        isWallTouch = Physics2D.OverlapBox(wallCheckPoint.position, new Vector2(0.06f, 0.6f), 0, wallerLayerMask);
+        float targetSpeed = speed * speedMultiper * relativeTransform.x;
+
+        if (isOnPlatform)
+        {
+            rigidbody2D.velocity = new Vector2(targetSpeed + platformRigitbody2d.velocity.x, rigidbody2D.velocity.y);
+        }
+        else
+        {
+            rigidbody2D.velocity = new Vector2(targetSpeed, rigidbody2D.velocity.y);
+        }
+
+        isWallTouch = Physics2D.OverlapBox(wallCheckPoint.position, new Vector2(0.03f, 0.6f), 0, wallerLayerMask);
         if (isWallTouch)
         {
             Flip();
