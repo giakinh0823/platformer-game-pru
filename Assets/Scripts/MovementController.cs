@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class MovementController : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D rigidBody2D;
 
     [SerializeField]
     public int speed;
@@ -32,7 +32,7 @@ public class MovementController : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidBody2D = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
     }
 
@@ -43,11 +43,11 @@ public class MovementController : MonoBehaviour
 
         if (isOnPlatform)
         {
-            rigidbody2D.velocity = new Vector2(targetSpeed + platformRigitbody2d.velocity.x, rigidbody2D.velocity.y);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(targetSpeed + platformRigitbody2d.velocity.x, GetComponent<Rigidbody2D>().velocity.y);
         }
         else
         {
-            rigidbody2D.velocity = new Vector2(targetSpeed, rigidbody2D.velocity.y);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(targetSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
 
         isWallTouch = Physics2D.OverlapBox(wallCheckPoint.position, new Vector2(0.03f, 0.6f), 0, wallerLayerMask);
