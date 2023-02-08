@@ -6161,6 +6161,7 @@ MonoBehaviour:
   wallCheckPoint: {fileID: 581653869}
   isOnPlatform: 0
   platformRigitbody2d: {fileID: 0}
+  particleController: {fileID: 1641700485}
 --- !u!114 &1220295443
 MonoBehaviour:
   m_ObjectHideFlags: 0

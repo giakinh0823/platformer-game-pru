@@ -25,6 +25,9 @@ public class MovementController : MonoBehaviour
     public bool isOnPlatform;
     public Rigidbody2D platformRigitbody2d;
 
+    [SerializeField]
+    public ParticleController particleController;
+
     public void Start()
     {
         UpdateRelativeTransform();
@@ -60,6 +63,7 @@ public class MovementController : MonoBehaviour
      
     public void Flip()
     {
+        particleController.PlayTouchParticle(wallCheckPoint.position);
         transform.Rotate(0, 180, 0);
         UpdateRelativeTransform();
     }

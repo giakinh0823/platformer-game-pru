@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour
 {
+    [Header("Movement Particle")]
     [SerializeField]
     private ParticleSystem movementParticle;
+    [Header("Fall Particle")]
     [SerializeField] 
     private ParticleSystem fallParticle;
+    [Header("Touch Particle")]
     [SerializeField]
     private ParticleSystem touchParticle;
 
@@ -25,6 +28,11 @@ public class ParticleController : MonoBehaviour
 
     private float counter;
     private bool isOnGround;
+
+    private void Start()
+    {
+        touchParticle.transform.parent = null;
+    }
 
     private void Update()
     {
@@ -56,8 +64,9 @@ public class ParticleController : MonoBehaviour
         }
     }
 
-    private void PlayTouchParticle()
+    public void PlayTouchParticle(Vector2 pos)
     {
+        touchParticle.transform.position = pos;
         touchParticle.Play();
     }
 }
