@@ -53,7 +53,7 @@ public class MovementController : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector2(targetSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
 
-        isWallTouch = Physics2D.OverlapBox(wallCheckPoint.position, new Vector2(0.03f, 0.6f), 0, wallerLayerMask);
+        isWallTouch = Physics2D.OverlapBox(wallCheckPoint.position, new Vector2(0.03f, 0.5f), 0, wallerLayerMask);
         if (isWallTouch)
         {
             Flip();
